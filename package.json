@@ -1,7 +1,12 @@
 {
-  "name": "talant.id",
-  "private": true,
-  "version": "0.0.1",
+  "name": "talant.id-front",
+  "author": {
+    "name": "Sergey Krivostanenko",
+    "email": "s.krivostanenko@mail.ru",
+    "url": "@AronSrg"
+  },
+  "private": false,
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,6 +25,7 @@
     "radix-ui": "^1.5.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-router-dom": "^7.17.0",
     "shadcn": "^4.11.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4",

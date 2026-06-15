@@ -1,21 +1,46 @@
-import { Button } from "@/components/ui/button"
+import { Navigate, Route, Routes } from "react-router-dom"
+import { LoginPage } from "./pages/login"
+import { StudentLayout } from "./components/student-layout"
+import { AdminPage } from "./pages/admin"
+import { MainLayout } from "./components/main-layout"
+import { MainPage } from "./pages/main"
+import { MethodistPage } from "./pages/methodist"
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/main/*"
+        element={
+          <>
+            <Routes>
+              <Route path="" element={<MainPage />} />
+            </Routes>
+
+            <MainLayout>
+              <Routes>
+                <Route path="admin" element={<AdminPage />} />
+              </Routes>
+
+              <Routes>
+                <Route path="methodist" element={<MethodistPage />} />
+              </Routes>
+            </MainLayout>
+          </>
+        }
+      />
+      <Route
+        path="/student/*"
+        element={
+          <>
+            <StudentLayout>
+              <Route path="universe" element />
+            </StudentLayout>
+          </>
+        }
+      />
+      <Route path="*" element={<Navigate to="/main" replace />} />
+    </Routes>
   )
 }
-
-export default App
