@@ -1,4 +1,4 @@
-import type { RoleType } from "@/lib/types"
+import type { RoleType } from "@/lib/constants"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
