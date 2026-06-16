@@ -1,134 +1,134 @@
-import { Avatar } from "@/components/avatar"
+import { QuestionTable, StatusBadge } from "@/components/question-table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import clsx from "clsx"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { filters, mentors, questions } from "@/lib/data"
+import { QuestionStatuses, QuestionTypes } from "@/lib/types&constants"
 import { PlusIcon } from "lucide-react"
-
-const QuestionStatuses = {
-  new: "Новый",
-  saved: "Сохраненный",
-  on_review: "на проверке",
-  need_to_fix: "Необходимо исправить",
-} as const
-
-export type QuestionStatuses =
-  (typeof QuestionStatuses)[keyof typeof QuestionStatuses]
-
-const filters = ["Автор", "Тип вопроса", "Статус", "Создано с", "Создано до"]
-const questions = [
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.new} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Роман Бурашнов" shortName="РБ" />,
-  },
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.on_review} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Методист Софья" shortName="МС" />,
-  },
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.saved} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Новый методист" shortName="НМ" />,
-  },
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.need_to_fix} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Специалист Русский" shortName="СР" />,
-  },
-]
 
 export function MethodistPage() {
   return (
     <div className="space-y-4">
       <h2 className="text-lg">Вопросы</h2>
       <div className="flex gap-1.5">
-        {filters.map((filter) => (
-          <Badge className="h-6 rounded-sm bg-card text-foreground">
+        {filters.map((filter, idx) => (
+          <Badge
+            key={filter + idx}
+            className="h-6 rounded-sm bg-card text-foreground"
+          >
             {filter}
           </Badge>
         ))}
       </div>
 
-      <table className="w-full">
-        <tr className="grid grid-cols-[2fr_2fr_3fr_1.6fr_1.3fr_1.3fr_2fr] pb-2">
-          {[
-            "Тип вопроса",
-            "Группа менторов",
-            "Тема вопроса",
-            "Статус",
-            "Создано",
-            "Обновлено",
-            "Автор",
-          ].map((title) => (
-            <th className="pl-4 text-left font-medium">{title}</th>
-          ))}
-        </tr>
-        {questions.map((question, idx) => (
-          <tr
-            key={question.theme + idx}
-            className="grid grid-cols-[2fr_2fr_3fr_1.6fr_1.3fr_1.3fr_2fr] bg-card last:border-b"
+      <QuestionTable questions={questions} />
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button
+            variant="primary"
+            className="h-11 w-full bg-transparent hover:bg-primary/10"
           >
-            {Object.values(question).map((col) => (
-              <td className="border-t border-l py-1.5 pl-4 last:border-r">
-                {col}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </table>
-      <Button
-        variant="primary"
-        className="h-11 w-full bg-transparent hover:bg-primary/10"
-      >
-        <PlusIcon />
-        Создать вопрос
-      </Button>
-    </div>
-  )
-}
+            <PlusIcon />
+            Создать вопрос
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="gap-0 p-0">
+          <DialogHeader className="p-5">
+            <DialogTitle>Редактирование вопроса</DialogTitle>
+            <DialogDescription>
+              <StatusBadge status={QuestionStatuses.new} />
+            </DialogDescription>
+          </DialogHeader>
 
-type StatusBadgeProps = {
-  status: QuestionStatuses
-}
+          <FieldGroup className="bg-background p-5">
+            <Field>
+              <FieldLabel htmlFor="question-type">Тип вопроса</FieldLabel>
+              <Select name="question-type">
+                <SelectTrigger className="h-9 w-full" id="question-type">
+                  <SelectValue placeholder="Выберите тип вопроса" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {Object.entries(QuestionTypes).map(([value, label]) => (
+                      <SelectItem key={value} value={value}>
+                        {label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </Field>
 
-function StatusBadge({ status }: StatusBadgeProps) {
-  const statusStyles: Record<QuestionStatuses, string> = {
-    Новый: "bg-[#027A48]/15 text-[#027A48]",
-    Сохраненный: "bg-secondary-foreground/15 text-secondary-foreground",
-    "на проверке": "bg-[#B54708]/15 text-[#B54708]",
-    "Необходимо исправить": "bg-destructive/15 text-destructive",
-  }
+            <Field>
+              <FieldLabel htmlFor="title">Название</FieldLabel>
+              <Input name="title" id="title" placeholder="Название" />
+            </Field>
 
-  return <Badge className={clsx(statusStyles[status])}>{status}</Badge>
-}
+            <Field>
+              <FieldLabel htmlFor="mentors-group">Группа менторов</FieldLabel>
+              <Select name="mentors-group">
+                <SelectTrigger className="h-9 w-full" id="mentors-group">
+                  <SelectValue placeholder="Выберите группу менторов" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {mentors.map((mentor) => (
+                      <SelectItem key={mentor.value} value={mentor.value}>
+                        {mentor.title}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </Field>
 
-type AvatarContainerProps = {
-  name: string
-  shortName: string
-}
+            <Field>
+              <FieldLabel htmlFor="description">Описание</FieldLabel>
+              <Textarea
+                name="description"
+                id="description"
+                placeholder="Описание"
+              />
+            </Field>
 
-function AuthorContainer({ name, shortName }: AvatarContainerProps) {
-  return (
-    <div className="flex items-center gap-2.5">
-      <Avatar className="size-8 text-sm">{shortName}</Avatar>
-      <p>{name}</p>
+            <Field>
+              <FieldLabel htmlFor="question">Вопрос</FieldLabel>
+              <Textarea name="question" id="question" placeholder="Вопрос" />
+            </Field>
+          </FieldGroup>
+
+          <DialogFooter className="flex justify-end gap-2 p-5">
+            <Button
+              variant="primary"
+              className="bg-transparent px-5 hover:bg-primary/1"
+            >
+              Сохранить
+            </Button>
+            <Button disabled aria-disabled className="px-5">
+              Опубликовать
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

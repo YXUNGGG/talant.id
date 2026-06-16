@@ -5,6 +5,7 @@ import { AdminPage } from "./pages/admin"
 import { MainLayout } from "./components/main-layout"
 import { MainPage } from "./pages/main"
 import { MethodistPage } from "./pages/methodist"
+import { ExpertPage } from "./pages/expert"
 
 export function App() {
   return (
@@ -21,10 +22,8 @@ export function App() {
             <MainLayout>
               <Routes>
                 <Route path="admin" element={<AdminPage />} />
-              </Routes>
-
-              <Routes>
                 <Route path="methodist" element={<MethodistPage />} />
+                <Route path="expert" element={<ExpertPage />} />
               </Routes>
             </MainLayout>
           </>

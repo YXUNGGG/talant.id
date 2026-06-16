@@ -93,7 +93,7 @@ export function MainLayout({ children }: MainLayoutProps) {
             </Button>
 
             <Dialog>
-              <DialogTrigger>
+              <DialogTrigger asChild>
                 <Button
                   variant="ghost"
                   className="w-full justify-start gap-3 pl-1 text-[16px]"

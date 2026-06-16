@@ -1,10 +1,10 @@
-import type { RoleType } from "@/lib/constants"
+import type { RoleValueType } from "@/lib/types&constants"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 export function MainPage() {
   const navigate = useNavigate()
-  const userRole = localStorage.getItem("role") as RoleType
+  const userRole = localStorage.getItem("role") as RoleValueType
 
   useEffect(() => {
     switch (userRole) {
@@ -24,7 +24,7 @@ export function MainPage() {
         navigate("/main/student")
         break
       default:
-        navigate("/student/universe")
+        navigate("/login")
     }
   })
 

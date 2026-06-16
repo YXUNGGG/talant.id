@@ -1,11 +1,10 @@
-import { BadgeGroup } from "@/pages/admin"
 import { Avatar } from "./avatar"
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion"
-import { existingRoles, type UserType } from "@/lib/constants"
+import { Roles, type UserType } from "@/lib/types&constants"
 import { Button } from "./ui/button"
 import { Edit2Icon, TrashIcon } from "lucide-react"
 import {
@@ -17,6 +16,7 @@ import {
   PopoverTrigger,
 } from "./ui/popover"
 import { Input } from "./ui/input"
+import { BadgeGroup } from "./badge-group"
 
 type AdminAccordionItemProps = {
   user: UserType
@@ -39,7 +39,7 @@ export function AdminAccordionItem({
 
   return (
     <AccordionItem value={user.id}>
-      <AccordionTrigger className="group flex w-full cursor-default gap-4">
+      <AccordionTrigger className="group flex w-full gap-4">
         <div className="flex flex-2 items-center gap-2">
           <Avatar className="size-9">{user.shortName}</Avatar>
           <div className="font-medium">
@@ -50,7 +50,7 @@ export function AdminAccordionItem({
         <div className="flex-3">
           <BadgeGroup
             values={user.roles}
-            fullState={existingRoles}
+            fullState={Object.values(Roles)}
             fullStateLabel="Роли"
           />
         </div>

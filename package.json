@@ -3,10 +3,10 @@
   "author": {
     "name": "Sergey Krivostanenko",
     "email": "s.krivostanenko@mail.ru",
-    "url": "@AronSrg"
+    "url": "https://t.me/@AronSrg"
   },
   "private": false,
-  "version": "0.1.1",
+  "version": "0.2.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
