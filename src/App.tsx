@@ -1,11 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { LoginPage } from "./pages/login"
-import { StudentLayout } from "./components/student-layout"
 import { AdminPage } from "./pages/admin"
-import { MainLayout } from "./components/main-layout"
+import { MainLayout } from "./components/layouts/main-layout"
 import { MainPage } from "./pages/main"
 import { MethodistPage } from "./pages/methodist"
 import { ExpertPage } from "./pages/expert"
+import { GameLayout } from "./components/layouts/game-layout"
+import { UniversePage } from "./pages/universe"
 
 export function App() {
   return (
@@ -24,6 +25,10 @@ export function App() {
                 <Route path="admin" element={<AdminPage />} />
                 <Route path="methodist" element={<MethodistPage />} />
                 <Route path="expert" element={<ExpertPage />} />
+                <Route
+                  path="gamedesigner"
+                  element={<UniversePage isExpert />}
+                />
               </Routes>
             </MainLayout>
           </>
@@ -33,9 +38,9 @@ export function App() {
         path="/student/*"
         element={
           <>
-            <StudentLayout>
+            <GameLayout>
               <Route path="universe" element />
-            </StudentLayout>
+            </GameLayout>
           </>
         }
       />

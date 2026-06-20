@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 export function MainPage() {
   const navigate = useNavigate()
   const userRole = localStorage.getItem("role") as RoleValueType
+  console.log(userRole)
 
   useEffect(() => {
     switch (userRole) {
@@ -21,7 +22,7 @@ export function MainPage() {
         navigate("/main/methodist")
         break
       case "student":
-        navigate("/main/student")
+        navigate("/student")
         break
       default:
         navigate("/login")

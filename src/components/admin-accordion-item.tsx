@@ -89,7 +89,7 @@ export function AdminAccordionItem({
                   required
                   name="email"
                 />
-                <PopoverClose>
+                <PopoverClose asChild>
                   <Button className="w-full" variant="primary">
                     Сохранить изменения
                   </Button>
@@ -118,7 +118,7 @@ export function AdminAccordionItem({
                 <PopoverTitle>Удалить пользователя</PopoverTitle>
               </PopoverHeader>
               <p>Вы хотите удалить этого пользователя?</p>
-              <PopoverClose>
+              <PopoverClose asChild>
                 <Button
                   className="w-full"
                   variant="destructive"

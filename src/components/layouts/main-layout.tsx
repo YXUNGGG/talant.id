@@ -5,24 +5,22 @@ import {
   ShieldUserIcon,
   UserSearchIcon,
 } from "lucide-react"
-import { Button } from "./ui/button"
+import { Button } from "../ui/button"
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarProvider,
-} from "./ui/sidebar"
+} from "../ui/sidebar"
 import { useLocation, useNavigate } from "react-router-dom"
 import clsx from "clsx"
-import { Input } from "./ui/input"
-import { Avatar } from "./avatar"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog"
+} from "../ui/dialog"
 
 type MainLayoutProps = {
   children: React.ReactNode
@@ -113,11 +111,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
-      <div className="flex min-h-screen w-full flex-col gap-4 p-4">
-        <header className="flex h-12 w-full items-center justify-between pr-2">
-          <Input placeholder="Поиск" className="h-full w-100" />
-          <Avatar className="size-11">РБ</Avatar>
-        </header>
+      <div className="flex min-h-screen w-full flex-col gap-4">
         <main className="h-[calc(100vh-96px)]">{children}</main>
       </div>
     </SidebarProvider>
