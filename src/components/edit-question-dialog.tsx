@@ -33,7 +33,7 @@ import {
 } from "@/lib/types&constants"
 import { mentors } from "@/lib/data"
 import { useState } from "react"
-import { CircleArrowUpIcon, UploadIcon } from "lucide-react"
+import { CircleArrowUpIcon } from "lucide-react"
 
 const author = { name: "Роман Бурашнов", shortName: "РБ" }
 
