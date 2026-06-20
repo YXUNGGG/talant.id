@@ -68,6 +68,7 @@ export function FilterPopover({
                   id={filter}
                   checked={filters.includes(filter)}
                   onCheckedChange={() => handleCheck(filter)}
+                  className={"not-aria-checked:group-hover:bg-muted"}
                 />
                 <Label htmlFor={filter} className="w-full cursor-pointer">
                   {filter}

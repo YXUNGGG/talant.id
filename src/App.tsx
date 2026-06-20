@@ -37,11 +37,14 @@ export function App() {
       <Route
         path="/student/*"
         element={
-          <>
-            <GameLayout>
-              <Route path="universe" element />
-            </GameLayout>
-          </>
+          <GameLayout>
+            <Routes>
+              <Route
+                path="universe"
+                element={<UniversePage isExpert={false} />}
+              />
+            </Routes>
+          </GameLayout>
         }
       />
       <Route path="*" element={<Navigate to="/main" replace />} />

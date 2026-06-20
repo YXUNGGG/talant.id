@@ -39,15 +39,15 @@ export function AdminAccordionItem({
 
   return (
     <AccordionItem value={user.id}>
-      <AccordionTrigger className="group flex w-full gap-4">
-        <div className="flex flex-2 items-center gap-2">
+      <AccordionTrigger className="group flex w-full">
+        <div className="flex min-w-max flex-5 items-center gap-2">
           <Avatar className="size-9">{user.shortName}</Avatar>
           <div className="font-medium">
             <h3 className="text-lg">{user.name}</h3>
             <p className="text-xs">{user.email}</p>
           </div>
         </div>
-        <div className="flex-3">
+        <div className="flex-6">
           <BadgeGroup
             values={user.roles}
             fullState={Object.values(Roles)}

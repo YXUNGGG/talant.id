@@ -2,7 +2,7 @@ import { Avatar } from "./avatar"
 import clsx from "clsx"
 import type { QuestionStatuses, QuestionType } from "@/lib/types&constants"
 import { Badge } from "./ui/badge"
-import { QuestionDialog } from "./question-dialog"
+import { EditQuestionDialog } from "./edit-question-dialog"
 
 type QuestionTableProps = {
   isExpert?: boolean
@@ -46,7 +46,7 @@ export function QuestionTable({
             }
           >
             {Object.values(tableData).map((col, idx) => (
-              <QuestionDialog
+              <EditQuestionDialog
                 key={idx}
                 isExert={isExpert}
                 addQuestion={addQuestion}

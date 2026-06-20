@@ -1,5 +1,6 @@
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react"
+import { useEffect, useState } from "react"
 import type { QuestionType } from "@/lib/types&constants"
+import { QuestionDialog } from "./question-dialog"
 
 const ROOT_X = 400
 const ROOT_Y = 100
@@ -10,14 +11,16 @@ const BEND_ANGLE = 12
 
 type UniverseBranchesProps = {
   nodes: QuestionType[][]
+  isStudent: boolean
   setActiveNode: (group: QuestionType[]) => void
-  setNodes: Dispatch<SetStateAction<QuestionType[][]>>
 }
 
 export function UniverseBranches({
   nodes,
   setActiveNode,
+  isStudent,
 }: UniverseBranchesProps) {
+  const [passedQuestionIds, setPassesQuestionIds] = useState<string[]>([])
   const [activeBranch, setActiveBranch] = useState<QuestionType[]>([])
 
   useEffect(() => {
@@ -96,27 +99,46 @@ export function UniverseBranches({
           />
 
           {nodes.map((node, bIdx) => {
-            return node.map((_, nIdx) => {
+            return node.map((question, nIdx) => {
               const depth = nIdx + 1
               const { x, y } = getCoords(bIdx, nodes.length, depth)
-              console.log(activeBranch)
 
               const isActive = activeBranch?.[0]?.group === node[0].group
 
-              return (
+              const circle = (
                 <circle
-                  key={`node-${bIdx}-${nIdx}`}
+                  key={bIdx + nIdx}
                   cx={x}
                   cy={y}
                   r={NODE_RADIUS}
-                  fill="#f9f5ff"
+                  strokeWidth="1"
+                  className="cursor-pointer"
+                  stroke={isActive ? "#a17af7" : "transparent"}
+                  fill={
+                    passedQuestionIds.includes(question.id)
+                      ? "#a17af7"
+                      : "#f9f5ff"
+                  }
                   onClick={() => {
                     setActiveNode(node)
                     setActiveBranch(node)
                   }}
-                  stroke={isActive ? "#a17af7" : "transparent"}
-                  strokeWidth="1"
                 />
+              )
+
+              console.log(isStudent)
+
+              return isStudent ? (
+                <QuestionDialog
+                  setPassed={() =>
+                    setPassesQuestionIds((prev) => [...prev, question.id])
+                  }
+                  question={question}
+                >
+                  {circle}
+                </QuestionDialog>
+              ) : (
+                circle
               )
             })
           })}
