@@ -1,6 +1,3 @@
-import { AuthorContainer, StatusBadge } from "@/components/question-table"
-import { QuestionStatuses } from "./types&constants"
-
 export const users = [
   {
     id: "34burashnov",
@@ -103,6 +100,24 @@ export const mentors = [
       },
     ],
   },
+  {
+    value: "phylosophy",
+    title: "Философия",
+    participants: [
+      {
+        name: "Анна Смирнова",
+        shortName: "АС",
+      },
+      {
+        name: "Михаил Соколов",
+        shortName: "МС",
+      },
+      {
+        name: "Вячеслав Синицын",
+        shortName: "ВС",
+      },
+    ],
+  },
 ]
 
 export const players = [
@@ -151,51 +166,5 @@ export const players = [
       },
     ],
     games: ["Математика", "Тест 22.12"],
-  },
-]
-
-export const filters = [
-  "Автор",
-  "Тип вопроса",
-  "Статус",
-  "Создано с",
-  "Создано до",
-]
-export const questions = [
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.new} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Роман Бурашнов" shortName="РБ" />,
-  },
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.on_review} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Методист Софья" shortName="МС" />,
-  },
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.saved} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Новый методист" shortName="НМ" />,
-  },
-  {
-    type: "С проверкой эксперта",
-    group: "Английский Язык",
-    theme: "Времена английского глагола",
-    status: <StatusBadge status={QuestionStatuses.need_to_fix} />,
-    created: "15 март. 2025г.",
-    updated: "15 март. 2025г.",
-    author: <AuthorContainer name="Специалист Русский" shortName="СР" />,
   },
 ]
