@@ -1,5 +1,5 @@
 import { QuestionTable } from "@/components/question-table"
-import { QuestionDialog } from "@/components/question-dialog"
+import { EditQuestionDialog } from "@/components/edit-question-dialog"
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
 import { useQuestion } from "@/hooks/useQuestion"
@@ -31,7 +31,7 @@ export function MethodistPage() {
             Ничего не найдено
           </div>
         )}
-        <QuestionDialog
+        <EditQuestionDialog
           addQuestion={addQuestion}
           isExert={false}
           trigger={

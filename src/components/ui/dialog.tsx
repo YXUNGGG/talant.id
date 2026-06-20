@@ -49,13 +49,15 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  zMax,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
+  zMax?: boolean
 }) {
   return (
     <DialogPortal>
-      <DialogOverlay />
+      <DialogOverlay className={zMax ? "z-100" : ""} />
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
@@ -72,8 +74,7 @@ function DialogContent({
               className="absolute top-4 right-4"
               size="icon-sm"
             >
-              <XIcon
-              />
+              <XIcon />
               <span className="sr-only">Close</span>
             </Button>
           </DialogPrimitive.Close>

@@ -98,8 +98,8 @@ export function UniversePage({ isExpert = false }: UniversePageProps) {
 
       <div className="min-h-screen w-full bg-[#E9D7FE]">
         <UniverseBranches
+          isStudent={!isExpert}
           nodes={nodes}
-          setNodes={setNodes}
           setActiveNode={setQuestionGroup}
         />
       </div>

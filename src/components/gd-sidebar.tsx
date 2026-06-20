@@ -18,6 +18,7 @@ import { Button } from "./ui/button"
 import { useQuestion } from "@/hooks/useQuestion"
 import { type QuestionType } from "@/lib/types&constants"
 import { useMemo } from "react"
+import { QuestionDialog } from "./question-dialog"
 
 type GDSidebarProps = {
   questionGroup: QuestionType[]
@@ -97,12 +98,14 @@ export function GDSidebar({
           <Field>
             <FieldLabel>Вопросы</FieldLabel>
             {questionGroup.map((question) => (
-              <Button
-                key={question.id}
-                className="pointer-events-none h-8 w-full justify-start bg-card text-foreground"
-              >
-                {question.title}
-              </Button>
+              <QuestionDialog question={question} isStudent={false}>
+                <Button
+                  key={question.id}
+                  className="h-8 w-full justify-start bg-card text-foreground hover:bg-mauve-200"
+                >
+                  {question.title}
+                </Button>
+              </QuestionDialog>
             ))}
           </Field>
 
