@@ -14,6 +14,7 @@ import { Input } from "./ui/input"
 import { PlusIcon, XIcon } from "lucide-react"
 import { Button } from "./ui/button"
 import clsx from "clsx"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 type BadgeGroupProps = {
   values: string[]
@@ -38,6 +39,8 @@ export function BadgeGroup({
   fullStateLabel,
   onChange,
 }: BadgeGroupProps) {
+  const [parentRef] = useAutoAnimate()
+
   const [active, setActive] = useState(values)
   const [full, setFull] = useState(fullState ?? [])
 
@@ -70,7 +73,7 @@ export function BadgeGroup({
   }
 
   return (
-    <div className="flex flex-wrap gap-1.5 px-6">
+    <div className="flex max-w-[250px] flex-wrap gap-1.5" ref={parentRef}>
       {label && <div className="w-full">{label}</div>}
       {active.map((val, idx) => (
         <Badge
@@ -119,8 +122,9 @@ export function BadgeGroup({
                 <p>Ничего не нашлось</p>
               ) : (
                 full.map((state) => (
-                  <Field key={state} orientation="horizontal">
+                  <Field key={state} orientation="horizontal" className="group">
                     <Checkbox
+                      className={"not-aria-checked:group-hover:bg-muted"}
                       id={state}
                       checked={active.includes(state)}
                       onCheckedChange={() => {
