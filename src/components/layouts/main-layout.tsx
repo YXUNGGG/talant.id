@@ -21,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog"
+import { ExitButton } from "../exit-button"
 
 type MainLayoutProps = {
   children: React.ReactNode
@@ -32,7 +33,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   return (
     <SidebarProvider>
       <Sidebar collapsible="none" className="z-90 min-h-screen min-w-[250px]">
-        <SidebarContent className="px-6 py-9">
+        <SidebarContent className="flex flex-col justify-between px-6 py-9">
           <SidebarGroup className="space-y-4">
             <Button
               variant="ghost"
@@ -108,6 +109,9 @@ export function MainLayout({ children }: MainLayoutProps) {
                 </DialogHeader>
               </DialogContent>
             </Dialog>
+          </SidebarGroup>
+          <SidebarGroup className="p-0">
+            <ExitButton />
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
