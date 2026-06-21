@@ -50,7 +50,7 @@ export function QuestionDialog({
           className="h-22 text-[15px]"
           onChange={(e) => setAnswer(e.target.value)}
         />
-        <DialogClose disabled={!isStudent && answer.length < 5}>
+        <DialogClose disabled={isStudent && answer.length < 5}>
           <Button
             disabled={isStudent && answer.length < 5}
             size="lg"

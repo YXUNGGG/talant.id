@@ -1,11 +1,11 @@
 import { Avatar } from "@/components/avatar"
 import { QuestionTable } from "@/components/question-table"
 import { Input } from "@/components/ui/input"
-import { useFilter } from "@/hooks/useFilter"
-import { useQuestion } from "@/hooks/useQuestion"
+import { useFilter } from "@/hooks/use-filter"
+import { useQuestionContext } from "@/hooks/use-question-context"
 
 export function ExpertPage() {
-  const { addQuestion, questionsArr } = useQuestion()
+  const { addQuestion, questionsArr } = useQuestionContext()
   const { filteredQuestions, filtersElement } = useFilter(questionsArr)
 
   return (

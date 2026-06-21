@@ -38,33 +38,36 @@ export function QuestionTable({
         </tr>
       </thead>
       <tbody>
-        {questions.map(({ id, currentQuestion, description, ...tableData }) => (
-          <tr
-            key={id}
-            className={
-              "grid bg-card last:border-b hover:bg-secondary/50" + gridColumns
-            }
-          >
-            {Object.values(tableData).map((col, idx) => (
-              <EditQuestionDialog
-                key={idx}
-                isExert={isExpert}
-                addQuestion={addQuestion}
-                initialValue={{
-                  id,
-                  currentQuestion,
-                  description,
-                  ...tableData,
-                }}
-                trigger={
-                  <td className="border-t border-l py-1.5 pl-4 last:border-r">
-                    {col}
-                  </td>
-                }
-              />
-            ))}
-          </tr>
-        ))}
+        {questions.map(
+          ({ id, currentQuestion, description, comment, ...tableData }) => (
+            <tr
+              key={id}
+              className={
+                "grid bg-card last:border-b hover:bg-secondary/50" + gridColumns
+              }
+            >
+              {Object.values(tableData).map((col, idx) => (
+                <EditQuestionDialog
+                  key={idx}
+                  isExert={isExpert}
+                  addQuestion={addQuestion}
+                  initialValue={{
+                    id,
+                    currentQuestion,
+                    description,
+                    comment,
+                    ...tableData,
+                  }}
+                  trigger={
+                    <td className="border-t border-l py-1.5 pl-4 last:border-r">
+                      {col}
+                    </td>
+                  }
+                />
+              ))}
+            </tr>
+          )
+        )}
       </tbody>
     </table>
   )

@@ -22,7 +22,7 @@ export function MainPage() {
         navigate("/main/methodist")
         break
       case "student":
-        navigate("/student")
+        navigate("/student/universe")
         break
       default:
         navigate("/login")

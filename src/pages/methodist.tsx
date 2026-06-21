@@ -2,13 +2,13 @@ import { QuestionTable } from "@/components/question-table"
 import { EditQuestionDialog } from "@/components/edit-question-dialog"
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
-import { useQuestion } from "@/hooks/useQuestion"
-import { useFilter } from "@/hooks/useFilter"
+import { useFilter } from "@/hooks/use-filter"
 import { Input } from "@/components/ui/input"
 import { Avatar } from "@/components/avatar"
+import { useQuestionContext } from "@/hooks/use-question-context"
 
 export function MethodistPage() {
-  const { addQuestion, questionsArr } = useQuestion()
+  const { addQuestion, questionsArr } = useQuestionContext()
   const { filteredQuestions, filtersElement } = useFilter(questionsArr)
 
   return (

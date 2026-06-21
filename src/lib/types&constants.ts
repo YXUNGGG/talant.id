@@ -46,5 +46,6 @@ export type QuestionType = {
   status: React.ReactElement<StatusBadgeProps>
   created: string
   updated: string
+  comment?: string
   author: React.ReactElement<AuthorContainerProps>
 }

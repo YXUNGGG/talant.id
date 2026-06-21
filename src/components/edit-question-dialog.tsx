@@ -55,16 +55,15 @@ export function EditQuestionDialog({
       type: QuestionTypes.expert_review as QuestionTypes,
       group: "",
       title: "",
+      comment: "",
       description: "",
       currentQuestion: "",
     }
   )
 
-  const createQuestion = (status: QuestionStatuses) => {
+  const confirmQuestion = (status: QuestionStatuses) => {
     addQuestion({
-      type: form.type,
-      group: form.group,
-      title: form.title,
+      ...form,
       status: <StatusBadge status={status} />,
       created: initialValue?.created || new Date().toLocaleDateString(),
       updated: new Date().toLocaleDateString(),
@@ -82,19 +81,22 @@ export function EditQuestionDialog({
     form.description &&
     form.currentQuestion
 
+  const isQuestionStatusConfirmed =
+    initialValue?.status.props.status === QuestionStatuses.new ||
+    initialValue?.status.props.status === QuestionStatuses.on_review
+
   const mentorControllers = [
     <Button
       variant="primary"
-      onClick={() => createQuestion(QuestionStatuses.saved)}
+      onClick={() => confirmQuestion(QuestionStatuses.saved)}
       className="bg-transparent px-5 hover:bg-primary/1"
     >
       Сохранить
     </Button>,
 
     <Button
-      onClick={() => createQuestion(QuestionStatuses.on_review)}
-      disabled={!isMainActionEnabled}
-      aria-disabled={!isMainActionEnabled}
+      onClick={() => confirmQuestion(QuestionStatuses.on_review)}
+      disabled={!isMainActionEnabled || isQuestionStatusConfirmed}
       className="px-5"
     >
       На проверку
@@ -104,7 +106,7 @@ export function EditQuestionDialog({
   const expertControllers = [
     <Button
       variant="primary"
-      onClick={() => createQuestion(QuestionStatuses.need_to_fix)}
+      onClick={() => confirmQuestion(QuestionStatuses.need_to_fix)}
       className="bg-transparent px-5 hover:bg-primary/1"
     >
       На доработку
@@ -113,7 +115,7 @@ export function EditQuestionDialog({
     <Button
       disabled={!isMainActionEnabled}
       aria-disabled={!isMainActionEnabled}
-      onClick={() => createQuestion(QuestionStatuses.new)}
+      onClick={() => confirmQuestion(QuestionStatuses.new)}
       className="px-5"
     >
       Опубликовать
@@ -218,20 +220,23 @@ export function EditQuestionDialog({
           <Field>
             <FieldLabel htmlFor="description">Описание</FieldLabel>
             <Textarea
+              name="description"
+              id="description"
+              placeholder="Описание"
               disabled={isExert}
               value={form.description}
               onChange={(e) =>
                 setForm((prev) => ({ ...prev, description: e.target.value }))
               }
-              name="description"
-              id="description"
-              placeholder="Описание"
             />
           </Field>
 
           <Field>
             <FieldLabel htmlFor="question">Вопрос</FieldLabel>
             <Textarea
+              name="question"
+              id="question"
+              placeholder="Вопрос"
               disabled={isExert}
               value={form.currentQuestion}
               onChange={(e) =>
@@ -240,11 +245,28 @@ export function EditQuestionDialog({
                   currentQuestion: e.target.value,
                 }))
               }
-              name="question"
-              id="question"
-              placeholder="Вопрос"
             />
           </Field>
+
+          {(isExert ||
+            initialValue?.status.props.status ===
+              QuestionStatuses.need_to_fix) && (
+            <Field>
+              <FieldLabel htmlFor="comment">Комментарий</FieldLabel>
+              <Textarea
+                name="comment"
+                id="comment"
+                placeholder="Введите комментарий"
+                value={form.comment}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    comment: e.target.value,
+                  }))
+                }
+              />
+            </Field>
+          )}
         </FieldGroup>
 
         <DialogFooter className="flex justify-end gap-2 p-5">
