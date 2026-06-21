@@ -76,10 +76,10 @@ export function BadgeGroup({
 
   return (
     <div
-      className="flex max-w-[250px] flex-wrap gap-1.5"
+      className="flex flex-wrap gap-1.5"
       ref={isAutoAnimate ? parentRef : undefined}
     >
-      {label && <div className="w-full">{label}</div>}
+      {label && <div className="w-full font-medium">{label}</div>}
       {active.map((val, idx) => (
         <Badge
           key={val + idx}
