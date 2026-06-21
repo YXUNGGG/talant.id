@@ -1,3 +1,4 @@
+import { Avatar } from "@/components/avatar"
 import { GDSidebar } from "@/components/gd-sidebar"
 import { AuthorContainer, StatusBadge } from "@/components/question-table"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,7 @@ import {
 import { UniverseBranches } from "@/components/universe-branches"
 import { QuestionStatuses, type QuestionType } from "@/lib/types&constants"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 type UniversePageProps = {
   isExpert?: boolean
@@ -133,12 +135,18 @@ export function UniversePage({ isExpert = false }: UniversePageProps) {
         />
       </div>
 
-      {isExpert && (
+      {isExpert ? (
         <GDSidebar
           questionGroup={questionGroup}
           setQuestionGroup={setQuestionGroup}
           setGroupNode={(node) => setNodes((prev) => [...prev, node])}
         />
+      ) : (
+        <div className="bg-[#E9D7FE] p-4">
+          <Link to="/student/profile">
+            <Avatar className="size-10 text-xl">БР</Avatar>
+          </Link>
+        </div>
       )}
     </SidebarProvider>
   )

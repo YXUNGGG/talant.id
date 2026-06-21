@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { LoginPage } from "./pages/login"
 import { AdminPage } from "./pages/admin"
 import { MainLayout } from "./components/layouts/main-layout"
 import { MainPage } from "./pages/main"
@@ -8,6 +7,8 @@ import { ExpertPage } from "./pages/expert"
 import { GameLayout } from "./components/layouts/game-layout"
 import { UniversePage } from "./pages/universe"
 import { QuestionContextProvider } from "./providers/question-context-provider"
+import { ProfilePage } from "./pages/profile"
+import { LoginPage } from "./pages/login"
 
 export function App() {
   return (
@@ -49,6 +50,7 @@ export function App() {
                 path="universe"
                 element={<UniversePage isExpert={false} />}
               />
+              <Route path="profile" element={<ProfilePage />} />
             </Routes>
           </GameLayout>
         }
