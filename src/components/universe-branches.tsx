@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { QuestionType } from "@/lib/types&constants"
 import { QuestionDialog } from "./question-dialog"
+import clsx from "clsx"
 
 const ROOT_X = 400
 const ROOT_Y = 100
@@ -103,33 +104,56 @@ export function UniverseBranches({
               const depth = nIdx + 1
               const { x, y } = getCoords(bIdx, nodes.length, depth)
 
-              const isActive = activeBranch?.[0]?.group === node[0].group
+              const isActive =
+                activeBranch?.[0]?.group === node[0].group && !isStudent
+
+              const isPinging =
+                node.slice(passedQuestionIds.length)[0]?.id === question.id &&
+                "animate-ping"
 
               const circle = (
-                <circle
-                  key={bIdx + nIdx}
-                  cx={x}
-                  cy={y}
-                  r={NODE_RADIUS}
-                  strokeWidth="1"
-                  className="cursor-pointer"
-                  stroke={isActive ? "#a17af7" : "transparent"}
-                  fill={
-                    passedQuestionIds.includes(question.id)
-                      ? "#a17af7"
-                      : "#f9f5ff"
-                  }
-                  onClick={() => {
-                    setActiveNode(node)
-                    setActiveBranch(node)
-                  }}
-                />
+                <g key={`node-group-${bIdx}-${nIdx}`}>
+                  {isPinging && isStudent && (
+                    <circle
+                      cx={x}
+                      cy={y}
+                      r={NODE_RADIUS}
+                      fill="#a17af7"
+                      className="animate-ping opacity-75"
+                      style={{ transformOrigin: `${x}px ${y}px` }}
+                    />
+                  )}
+                  <circle
+                    key={bIdx + nIdx}
+                    cx={x}
+                    cy={y}
+                    r={NODE_RADIUS}
+                    strokeWidth="1"
+                    className={clsx(
+                      "cursor-pointer transition-[fill_150ms]",
+                      isStudent && "hover:fill-[#DDBAFf]"
+                    )}
+                    stroke={
+                      isActive || passedQuestionIds.includes(question.id)
+                        ? "#572b9e"
+                        : "transparent"
+                    }
+                    fill={
+                      passedQuestionIds.includes(question.id)
+                        ? "#a17af7"
+                        : "#f9f5ff"
+                    }
+                    onClick={() => {
+                      setActiveNode(node)
+                      setActiveBranch(node)
+                    }}
+                  />
+                </g>
               )
 
-              console.log(isStudent)
-
-              return isStudent ? (
+              return isStudent && !passedQuestionIds.includes(question.id) ? (
                 <QuestionDialog
+                  key={question.id}
                   setPassed={() =>
                     setPassesQuestionIds((prev) => [...prev, question.id])
                   }

@@ -19,19 +19,45 @@ type UniversePageProps = {
 }
 
 export function UniversePage({ isExpert = false }: UniversePageProps) {
-  const [questionGroup, setQuestionGroup] = useState<QuestionType[]>([])
   const [nodes, setNodes] = useState<QuestionType[][]>([
+    [
+      {
+        id: "secret1",
+        type: "С проверкой эксперта",
+        group: "Английский язык",
+        title: "Времена английского языка",
+        status: <StatusBadge status={QuestionStatuses.new} />,
+        created: "16/06/2026",
+        updated: "17/06/2026",
+        description:
+          "В английском языке используют множество времен для описания прошедшего, настоящего или будущего",
+        currentQuestion: "Сколько времен существует для описания прошедшего?",
+        author: <AuthorContainer name="Роман Бурашнов" shortName="РБ" />,
+      },
+      {
+        id: "secret42342",
+        type: "С проверкой эксперта",
+        group: "Английский язык",
+        title: "Местоимения",
+        status: <StatusBadge status={QuestionStatuses.saved} />,
+        created: "16/06/2026",
+        updated: "16/06/2026",
+        description: "Перечислите личные местоимения, которые вы знаете",
+        currentQuestion: "Назовите личные местоимения",
+        author: <AuthorContainer name="Специалист Русский" shortName="СР" />,
+      },
+    ],
     [
       {
         id: "secret2",
         type: "С проверкой эксперта",
         group: "Русский язык",
         title: "Грамматика и Пунктуация",
-        status: <StatusBadge status={QuestionStatuses.on_review} />,
-        created: "15 март. 2025г.",
-        updated: "15 март. 2025г.",
-        description: "небольшое описание",
-        currentQuestion: "Ваш вопрос",
+        status: <StatusBadge status={QuestionStatuses.new} />,
+        created: "16/06/2026",
+        updated: "16/06/2026",
+        description: "Вам нужно выделить корень в предложенном сломе",
+        currentQuestion: "Каков корень в слове 'ОКЕАНИЧЕСКИЙ'?",
         author: <AuthorContainer name="Методист Софья" shortName="МС" />,
       },
       {
@@ -40,14 +66,17 @@ export function UniversePage({ isExpert = false }: UniversePageProps) {
         group: "Русский язык",
         title: "Падежи и склонения",
         status: <StatusBadge status={QuestionStatuses.on_review} />,
-        created: "15 март. 2025г.",
-        updated: "15 март. 2025г.",
-        description: "небольшое описание",
-        currentQuestion: "Ваш вопрос",
+        created: "16/06/2026",
+        updated: "16/06/2026",
+        description:
+          "Существуют несколько падежей для форм окончания существительных...",
+        currentQuestion: "Сколько падежей в Русском языке?",
         author: <AuthorContainer name="Методист Софья" shortName="МС" />,
       },
     ],
   ])
+
+  const [questionGroup, setQuestionGroup] = useState<QuestionType[]>(nodes[1])
 
   return (
     <SidebarProvider
@@ -63,15 +92,15 @@ export function UniversePage({ isExpert = false }: UniversePageProps) {
         side="left"
         className="left-62.5! min-w-[250px] border-0! py-8"
       >
-        <SidebarHeader className="pt-0 font-semibold">
+        <SidebarHeader className="px-4 pt-0 font-semibold">
           <h2 className="text-xl">Вселенные</h2>
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent className="px-2">
           <SidebarGroup className="space-y-6">
             <Input placeholder="Поиск" className="h-8" />
             <div className="space-y-2">
               <Button
-                className="w-full justify-start hover:bg-primary/10"
+                className="w-full justify-start bg-primary/10 hover:bg-primary/10"
                 variant="ghost"
                 size="sm"
               >
