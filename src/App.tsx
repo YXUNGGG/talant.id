@@ -7,6 +7,7 @@ import { MethodistPage } from "./pages/methodist"
 import { ExpertPage } from "./pages/expert"
 import { GameLayout } from "./components/layouts/game-layout"
 import { UniversePage } from "./pages/universe"
+import { QuestionContextProvider } from "./providers/question-context-provider"
 
 export function App() {
   return (
@@ -23,13 +24,18 @@ export function App() {
             <MainLayout>
               <Routes>
                 <Route path="admin" element={<AdminPage />} />
-                <Route path="methodist" element={<MethodistPage />} />
-                <Route path="expert" element={<ExpertPage />} />
                 <Route
                   path="gamedesigner"
                   element={<UniversePage isExpert />}
                 />
               </Routes>
+
+              <QuestionContextProvider>
+                <Routes>
+                  <Route path="methodist" element={<MethodistPage />} />
+                  <Route path="expert" element={<ExpertPage />} />
+                </Routes>
+              </QuestionContextProvider>
             </MainLayout>
           </>
         }
