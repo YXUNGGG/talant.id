@@ -51,22 +51,31 @@ export function useFilter(questions: QuestionType[]) {
 
   const filtersElement = (
     <div className="flex gap-1.5">
+      <Badge className="h-6 rounded-sm bg-card text-foreground select-none data-open:border-primary">
+        Автор
+      </Badge>
       <FilterPopover
         values={typesArr}
         onChange={(values) => setFilteredQuestion("types", values)}
       >
-        <Badge className="h-6 cursor-pointer rounded-sm bg-card text-foreground data-open:border-primary">
-          Тип вопроса
+        <Badge className="h-6 cursor-pointer rounded-sm bg-card text-foreground select-none data-open:border-primary">
+          Тип вопроса{filter.types.length ? `: ${filter.types.length}` : ""}
         </Badge>
       </FilterPopover>
       <FilterPopover
         values={statusesArr}
         onChange={(values) => setFilteredQuestion("statuses", values)}
       >
-        <Badge className="h-6 cursor-pointer rounded-sm bg-card text-foreground data-open:border-primary">
-          Статус
+        <Badge className="h-6 cursor-pointer rounded-sm bg-card text-foreground select-none data-open:border-primary">
+          Статус{filter.statuses.length ? `: ${filter.statuses.length}` : ""}
         </Badge>
       </FilterPopover>
+      <Badge className="h-6 rounded-sm bg-card text-foreground select-none data-open:border-primary">
+        Создано с
+      </Badge>
+      <Badge className="h-6 rounded-sm bg-card text-foreground select-none data-open:border-primary">
+        Создано до
+      </Badge>
     </div>
   )
 

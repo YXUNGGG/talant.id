@@ -62,7 +62,7 @@ export function FilterPopover({
               <Field
                 key={filter + idx}
                 orientation="horizontal"
-                className="py-1"
+                className="group py-1"
               >
                 <Checkbox
                   id={filter}
