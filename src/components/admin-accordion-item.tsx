@@ -30,6 +30,12 @@ export function AdminAccordionItem({
   removeUser,
 }: AdminAccordionItemProps) {
   const handleEditUser = (formData: FormData) => {
+    console.log(user)
+    console.log({
+      name: formData.get("name")?.toString(),
+      email: formData.get("email")?.toString(),
+    })
+
     editUser({
       ...user,
       name: formData.get("name")?.toString() ?? user.name,
@@ -79,17 +85,15 @@ export function AdminAccordionItem({
                   className="h-8"
                   placeholder="ФИО"
                   defaultValue={user.name}
-                  required
                   name="name"
                 />
                 <Input
                   className="h-8"
                   placeholder="Email"
                   defaultValue={user.email}
-                  required
                   name="email"
                 />
-                <PopoverClose asChild>
+                <PopoverClose>
                   <Button className="w-full" variant="primary">
                     Сохранить изменения
                   </Button>

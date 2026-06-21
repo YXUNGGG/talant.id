@@ -21,6 +21,7 @@ type BadgeGroupProps = {
   className?: string
   variant?: "default" | "primary" | "secondary"
   label?: string
+  isAutoAnimate?: boolean
   onChange?: (values: string[]) => void
   /**
    * Needs to implement add and remove functionality
@@ -36,6 +37,7 @@ export function BadgeGroup({
   className,
   variant,
   fullState,
+  isAutoAnimate = true,
   fullStateLabel,
   onChange,
 }: BadgeGroupProps) {
@@ -73,7 +75,10 @@ export function BadgeGroup({
   }
 
   return (
-    <div className="flex max-w-[250px] flex-wrap gap-1.5" ref={parentRef}>
+    <div
+      className="flex max-w-[250px] flex-wrap gap-1.5"
+      ref={isAutoAnimate ? parentRef : undefined}
+    >
       {label && <div className="w-full">{label}</div>}
       {active.map((val, idx) => (
         <Badge

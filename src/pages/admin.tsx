@@ -58,6 +58,7 @@ export function AdminPage() {
     setUsersState((prev) => {
       const currentArr = [...prev]
       const userIdx = prev.findIndex((usr) => usr.id === user.id)
+      console.log(userIdx)
 
       if (userIdx !== -1) currentArr[userIdx] = { ...user }
       return currentArr
@@ -67,6 +68,7 @@ export function AdminPage() {
   const removeUser = (id: string) => {
     setUsersState((prev) => prev.filter((user) => user.id !== id))
   }
+
   return (
     <div className="space-y-4 p-4">
       <header className="flex h-12 w-full items-center justify-between pr-2">
@@ -132,17 +134,16 @@ export function AdminPage() {
                     type="password"
                   />
 
-                  <div className="-mx-6">
-                    <BadgeGroup
-                      values={["Игрок"]}
-                      onChange={setNewUserRoles}
-                      fullState={Object.values(Roles)}
-                      fullStateLabel="Роли"
-                      label="Роли"
-                    />
-                  </div>
+                  <BadgeGroup
+                    isAutoAnimate={false}
+                    values={["Игрок"]}
+                    onChange={setNewUserRoles}
+                    fullState={Object.values(Roles)}
+                    fullStateLabel="Роли"
+                    label="Роли"
+                  />
 
-                  <DialogClose className="w-full!" asChild>
+                  <DialogClose className="w-full!">
                     <Button variant="primary" className="w-full flex-1">
                       Создать пользователя
                     </Button>
