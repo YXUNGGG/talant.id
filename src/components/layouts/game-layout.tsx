@@ -32,7 +32,7 @@ export function GameLayout({ children }: GameLayoutProps) {
           <SidebarGroup className="space-y-4">
             <Button
               variant="ghost"
-              onClick={() => navigate("/gd/expert")}
+              onClick={() => navigate("/student/universe")}
               className={clsx(
                 pathnames.includes("expert") && "bg-secondary",
                 "justify-start gap-3 pl-1 text-[16px]"
